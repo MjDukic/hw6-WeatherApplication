@@ -1,5 +1,9 @@
 //ALL OF MY ELEMENTS
 
+var today = moment();
+$("#date").text(today.format("MMMM Do, YYYY"));
+
+
 var input = document.querySelector('#input')
 
 input.addEventListener('keyup', function(event) {

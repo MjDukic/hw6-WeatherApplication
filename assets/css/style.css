@@ -1,7 +1,22 @@
 body {
-    background-color: rgb(186, 130, 186);
+    background-color: rgb(86, 137, 176);
 }
 
 h1 {
     color: whitesmoke;
+    font-size: 53px;
+    font-family: Optima, sans-serif;
+    display: flex;
+    justify-content: center;
+
+}
+
+p {
+
+    color: whitesmoke;
+    font-size: 23px;
+    font-family: Optima, sans-serif;
+    display: flex;
+    justify-content: center;
+
 }
