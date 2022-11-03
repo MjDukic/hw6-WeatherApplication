@@ -37,18 +37,28 @@ function getCurrentWeather (arguments) {
     return fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${arguments.lat}&lon=${arguments.lon}&units=imperials&appid=${API_KEY}`)
     
 }
-//function that puts all this on one and use whatever location we tell it to use
-function createWeatherDisplay(location) { 
-    //saving already searched items
+//saving already searched items
+function addToHistory(location) {
     var searchHistory = localStorage.getItem('history')
     if (searchHistory) {
         searchHistory = JSON.parse(searchHistory)
+
+        if (searchHistory.includes(location)) {
+            return
+        }
+
         searchHistory.push(location)
         localStorage.setItem('history', JSON.stringify(searchHistory))
     } else {
         searchHistory = [location]
         localStorage.setItem('history', JSON.stringify(searchHistory))
     }
+}
+
+
+
+//function that puts all this on one and use whatever location we tell it to use
+function createWeatherDisplay(location) { 
     //function that returns a promise. the promise is a fetch to api geolocator.. we know its a promise bc it returns a .then
     return getGeoLocation(location)
     .then(function(response) {
@@ -62,17 +72,17 @@ function createWeatherDisplay(location) {
         erroEl.textContent = `We couldn't find ${location}`
         document.body.appendChild(erroEl)
         } else {
-            getCurrentWeather({lat: data[0].lat, lon: data[0].lon})
+            getCurrentWeather({ lat: data[0].lat, lon: data[0].lon })
             .then(weatherResponse => weatherResponse.json())
             .then(weatherData => {
-             var weatherPicture = document.createElement('img')
+                var weatherPicture = document.createElement('img')
                 weatherPicture.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
-    
                 var currentWeatherStatement = document.createElement('p')
                 currentWeatherStatement.textContent = `${weatherData.weather[0].main}: it is currently ${weatherData.weather[0].description}`
                 //printed to screen
                 document.body.appendChild(weatherPicture)
                 document.body.appendChild(currentWeatherStatement)
+                addToHistory(location)
             })
             //catch is to literally catch the errors if we have any.. good practice to include after .then
             .catch(error => {
