@@ -37,6 +37,8 @@ function getCurrentWeather (arguments) {
     return fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${arguments.lat}&lon=${arguments.lon}&units=imperials&appid=${API_KEY}`)
     
 }
+
+
 //saving already searched items
 function addToHistory(location) {
     var searchHistory = localStorage.getItem('history')
