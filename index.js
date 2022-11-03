@@ -34,7 +34,7 @@ function getGeoLocation(query, limit = 5) {
 }
 
 function getCurrentWeather (arguments) {
-    return fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${arguments.lat}&lon=${arguments.lon}&units=imperials&appid=${API_KEY}`)
+    return fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${arguments.lat}&lon=${arguments.lon}&units=imperial&appid=${API_KEY}`)
     
 }
 
@@ -80,7 +80,7 @@ function createWeatherDisplay(location) {
                 var weatherPicture = document.createElement('img')
                 weatherPicture.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
                 var currentWeatherStatement = document.createElement('p')
-                currentWeatherStatement.textContent = `${weatherData.weather[0].main}: it is currently ${weatherData.weather[0].description}`
+                currentWeatherStatement.textContent = `${weatherData.weather[0].main}: it is currently ${weatherData.main.temp}`
                 //printed to screen
                 document.body.appendChild(weatherPicture)
                 document.body.appendChild(currentWeatherStatement)
