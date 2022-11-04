@@ -4,6 +4,8 @@
 var today = moment();
 $("#date").text(today.format("MMMM Do, YYYY"));
 
+var forecast = document.querySelector('#forecast')
+
 
 //explain!!!
 var input = document.querySelector('#input')
@@ -46,9 +48,17 @@ function getGeoLocation(query, limit = 5) {
     return fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=${limit}&appid=${API_KEY}`)
 }
 
+//for current day
 function getCurrentWeather (arguments) {
     return fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${arguments.lat}&lon=${arguments.lon}&units=imperial&appid=${API_KEY}`)
     
+}
+
+//for 5 day forecast
+
+function getCurrentFiveDayWeather (arguments) {
+    return fetch (`https://api.openweathermap.org/data/2.5/forecast?lat=${arguments.lat}&lon=${arguments.lon}&units=imperial&appid=${API_KEY}`)
+
 }
 
 
@@ -92,13 +102,36 @@ function createWeatherDisplay(location) {
             .then(weatherData => {
                 var weatherPicture = document.createElement('img')
                 weatherPicture.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
+                var currentDayDiv = document.createElement('div')
                 var currentWeatherStatement = document.createElement('p')
                 currentWeatherStatement.textContent = `${weatherData.weather[0].main}: it is currently ${weatherData.main.temp} F`
                 //printed to screen
-                document.body.appendChild(weatherPicture)
-                document.body.appendChild(currentWeatherStatement)
                 addToHistory(location)
+                currentDayDiv.append(currentWeatherStatement, weatherPicture)
+                currentDay.append(currentDayDiv)
+    
             })
+            //for 5 day forecast
+            getCurrentFiveDayWeather({ lat: data[0].lat, lon: data[0].lon })
+            .then(fiveDayResponse => fiveDayResponse.json())
+            .then(fiveDayData => {
+                for (i = 0; i < 5; i++) {
+                    var dayForecastDiv = document.createElement('div')
+                    var header = document.createElement('h3')
+                    header.textContent = today.add(i + 1, "days").format("MM/D/YYYY")
+                    var fiveDayStatement = document.createElement('p')
+                    fiveDayStatement.textContent = ` Temp: ${fiveDayData.list[i].main.temp} F`
+                    var windForecast = document.createElement('p')
+                    windForecast.textContent = ` Wind: ${fiveDayData.list[i].wind.speed} MPH`
+                    var humidityForecast = document.createElement('p')
+                    humidityForecast.textContent = ` Humidity: ${fiveDayData.list[i].main.humidity} %`
+
+                    dayForecastDiv.append(header, fiveDayStatement, windForecast, humidityForecast)
+                    forecast.append(dayForecastDiv)
+                    
+                }
+            })
+
             //catch is to literally catch the errors if we have any.. good practice to include after .then
             .catch(error => {
                 document.body.textContent = error.message
@@ -109,5 +142,6 @@ function createWeatherDisplay(location) {
     .catch (error => {
         document.body.textContent = error.message
     })
+
     
 }

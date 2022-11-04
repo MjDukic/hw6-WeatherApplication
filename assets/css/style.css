@@ -46,3 +46,12 @@ p {
 
 }
 
+#currentDay {
+    justify-content: center;
+    margin-left: 450px;
+}
+
+#forecast {
+    display: flex;
+    border: 1px solid whitesmoke;
+}
