@@ -1,9 +1,11 @@
 //ALL OF MY ELEMENTS
 
+//todays date! using moment and jquery
 var today = moment();
 $("#date").text(today.format("MMMM Do, YYYY"));
 
 
+//explain!!!
 var input = document.querySelector('#input')
 
 input.addEventListener('keyup', function(event) {
@@ -12,6 +14,7 @@ input.addEventListener('keyup', function(event) {
     }
 })
 
+//so that the histroy does not duplicate and only shows once
 var previousSearchHistory = localStorage.getItem('history')
 if(previousSearchHistory) {
     previousSearchHistory = JSON.parse(previousSearchHistory)
@@ -19,16 +22,22 @@ if(previousSearchHistory) {
     previousSearchHistory = []
 ]
 
+//FOR BUTTON TO WORK
 for (var i = 0; i < previousSearchHistory.length; i++) {
-    var historyBtn = document.createElement('button')
+    var historyWrapper = document.createElement('div')
+    historyWrapper.classList.add('historyBtn')
+    var historyBtn = document.createElement('button') 
     var historyItem = previousSearchHistory[i]
     historyBtn.textContent = historyItem
     historyBtn.addEventListener('click', function(event) {
         createWeatherDisplay(event.target.textContent)
     })
 
-    document.body.appendChild(historyBtn)
+    historyWrapper.appendChild(historyBtn)
+    document.body.appendChild(historyWrapper)
 }
+
+
 
 var API_KEY = '30ddf985a1744060db6e437b6a64a78e'
 
@@ -84,7 +93,7 @@ function createWeatherDisplay(location) {
                 var weatherPicture = document.createElement('img')
                 weatherPicture.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
                 var currentWeatherStatement = document.createElement('p')
-                currentWeatherStatement.textContent = `${weatherData.weather[0].main}: it is currently ${weatherData.main.temp}`
+                currentWeatherStatement.textContent = `${weatherData.weather[0].main}: it is currently ${weatherData.main.temp} F`
                 //printed to screen
                 document.body.appendChild(weatherPicture)
                 document.body.appendChild(currentWeatherStatement)

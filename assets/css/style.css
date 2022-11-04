@@ -11,12 +11,38 @@ h1 {
 
 }
 
-p {
+h3 {
 
     color: whitesmoke;
-    font-size: 23px;
+    font-size: 24px;
     font-family: Optima, sans-serif;
     display: flex;
     justify-content: center;
 
 }
+
+p {
+    color: black;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: Andale Mono, monospace;
+    padding: 20px;
+    margin-bottom: 0;
+}
+
+#input {
+    margin-left: 23px;
+    border-radius: 5px;
+    display: block;
+    width: 210px;
+    padding: 10px;
+
+}
+
+.historyBtn {
+    margin-left: 23px;
+    border-radius: 5px;
+    
+
+}
+
