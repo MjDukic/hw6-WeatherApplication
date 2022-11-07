@@ -35,8 +35,8 @@ for (var i = 0; i < previousSearchHistory.length; i++) {
         createWeatherDisplay(event.target.textContent)
     })
 
-    historyWrapper.appendChild(historyBtn)
-    document.body.appendChild(historyWrapper)
+    historyWrapper.append(historyBtn)
+    historyPlacement.append(historyWrapper)
 }
 
 
@@ -65,6 +65,7 @@ function getCurrentFiveDayWeather (arguments) {
 //saving already searched items
 function addToHistory(location) {
     var searchHistory = localStorage.getItem('history')
+
     if (searchHistory) {
         searchHistory = JSON.parse(searchHistory)
 
@@ -104,10 +105,16 @@ function createWeatherDisplay(location) {
                 weatherPicture.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
                 var currentDayDiv = document.createElement('div')
                 var currentWeatherStatement = document.createElement('p')
-                currentWeatherStatement.textContent = `${weatherData.weather[0].main}: it is currently ${weatherData.main.temp} F`
+                var theDate = document.createElement('h3')
+                theDate.textContent = today.format("MM/D/YYYY")
+                currentWeatherStatement.textContent = `Temp: ${weatherData.main.temp} F`
+                var currentWind = document.createElement('p')
+                currentWind.textContent = `Wind: ${weatherData.wind.speed} MPH`
+                var currentHumidity = document.createElement('p')
+                currentHumidity.textContent = `Humidity: ${weatherData.main.humidity} %`
                 //printed to screen
                 addToHistory(location)
-                currentDayDiv.append(currentWeatherStatement, weatherPicture)
+                currentDayDiv.append(weatherPicture, theDate, currentWeatherStatement, currentWind, currentHumidity)
                 currentDay.append(currentDayDiv)
     
             })
@@ -118,7 +125,7 @@ function createWeatherDisplay(location) {
                 for (i = 0; i < 5; i++) {
                     var dayForecastDiv = document.createElement('div')
                     var header = document.createElement('h3')
-                    header.textContent = today.add(i + 1, "days").format("MM/D/YYYY")
+                    header.textContent = today.add(1, "days").format("MM/D/YYYY")
                     var fiveDayStatement = document.createElement('p')
                     fiveDayStatement.textContent = ` Temp: ${fiveDayData.list[i].main.temp} F`
                     var windForecast = document.createElement('p')

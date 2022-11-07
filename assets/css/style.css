@@ -1,14 +1,11 @@
-body {
-    background-color: rgb(86, 137, 176);
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-h1 {
-    color: whitesmoke;
-    font-size: 53px;
-    font-family: Optima, sans-serif;
-    display: flex;
-    justify-content: center;
-
+main {
+    background-image: linear-gradient(to right, rgb(14, 67, 91), rgb(180, 204, 218)); 
 }
 
 h3 {
@@ -21,13 +18,26 @@ h3 {
 
 }
 
+body {
+    background-color: rgb(131, 158, 179);
+}
+
+h1 {
+    color: whitesmoke;
+    font-size: 50px;
+    font-family: Optima, sans-serif;
+    display: flex;
+    justify-content: center;
+
+}
+
 p {
     color: black;
     font-weight: bold;
     font-size: 22px;
     font-family: Andale Mono, monospace;
     padding: 20px;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 
 #input {
@@ -42,16 +52,19 @@ p {
 .historyBtn {
     margin-left: 23px;
     border-radius: 5px;
+
+}
+
+
+#currentDay {
+    display: flex;
+    justify-content:space-around;
+    padding-left: -5px;
     
 
 }
 
-#currentDay {
-    justify-content: center;
-    margin-left: 450px;
-}
-
 #forecast {
     display: flex;
-    border: 1px solid whitesmoke;
+    /* border: 1px solid whitesmoke; */
 }
