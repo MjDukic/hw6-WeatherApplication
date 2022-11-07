@@ -47,13 +47,13 @@ p {
     width: 210px;
     padding: 10px;
 
-}
+} 
 
 .historyBtn {
     margin-left: 23px;
     border-radius: 5px;
 
-}
+} 
 
 
 #currentDay {
@@ -67,4 +67,10 @@ p {
 #forecast {
     display: flex;
     /* border: 1px solid whitesmoke; */
+}
+
+.searchDay {
+    justify-content: center;
+    
+
 }
