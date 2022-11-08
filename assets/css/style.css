@@ -43,7 +43,7 @@ p {
 #input {
     margin-left: 23px;
     border-radius: 5px;
-    display: block;
+    /* display: block; */
     width: 210px;
     padding: 10px;
 
@@ -52,6 +52,7 @@ p {
 .historyBtn {
     margin-left: 23px;
     border-radius: 5px;
+    float: left;
 
 } 
 
@@ -59,8 +60,7 @@ p {
 #currentDay {
     display: flex;
     justify-content:space-around;
-    padding-left: -5px;
-    
+    padding-left: -5px; 
 
 }
 
@@ -69,8 +69,9 @@ p {
     /* border: 1px solid whitesmoke; */
 }
 
+
+/* 
 .searchDay {
     justify-content: center;
     
-
-}
+} */
